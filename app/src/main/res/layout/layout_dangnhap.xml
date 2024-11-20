@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".DangKyActivity"
+    android:background="@color/material_dynamic_primary50"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Đăng nhập"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:layout_above="@+id/lnKhungDangKy"
+        android:layout_marginBottom="20dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/lnKhungDangKy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+        <EditText
+            android:id="@+id/edtLoginUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:hint="Tên đăng nhập"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="10dp"
+            />
+        <EditText
+            android:id="@+id/edtLoginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:hint="Nhập mật khẩu"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/lock"
+            android:drawablePadding="10dp"
+            android:password="true"
+            tools:ignore="Deprecated" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            >
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:backgroundTintMode="src_in"
+                android:backgroundTint="@color/redButton" />
+
+            <Button
+                android:id="@+id/btnLoginBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Trở về"
+                android:layout_margin="10dp"
+                android:backgroundTintMode="src_in"
+                android:backgroundTint="@color/greenButton"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvBackToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Đi đến đăng ký"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:textColor="@color/white"
+            android:focusable="true" />
+    </LinearLayout>
+
+</RelativeLayout>
