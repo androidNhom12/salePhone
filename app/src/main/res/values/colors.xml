@@ -5,4 +5,5 @@
     <color name="gray">#CCC</color>
     <color name="redButton">#d32f2f</color>
     <color name="greenButton">#00695c</color>
+    <color name="primary">#00a3a4</color>
 </resources>

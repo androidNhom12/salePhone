@@ -10,10 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.salephone.entity.Product;
 import com.example.salephone.entity.User;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CreateDatabase extends SQLiteOpenHelper {
@@ -181,6 +184,82 @@ public class CreateDatabase extends SQLiteOpenHelper {
         values.put("created_at", dateNow);
         SQLiteDatabase db = this.getWritableDatabase();
         return db.insert("Users", null, values);
+    }
+
+    // add product to database
+    public boolean addProduct(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name",product.getName());
+        values.put("price",product.getPrice());
+        values.put("description",product.getDescription());
+        values.put("image_url", "");
+
+        long result = db.insert("Products",null,values);
+        db.close();
+        return result != -1;
+    }
+
+    // get all product
+    public List<Product> getAllProduct() {
+        List<Product> products = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM Products";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor != null) {
+            while (cursor.moveToNext()) {
+                // Đọc dữ liệu từ cursor và tạo đối tượng Product
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("product_id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String price = cursor.getString(cursor.getColumnIndexOrThrow("price"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                String imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
+
+                // Tạo đối tượng Product và thêm vào danh sách
+                Product product = new Product(id, name, price, description, imageUrl);
+                products.add(product);
+            }
+            cursor.close();
+        }
+        db.close();
+        return products;
+    }
+    public boolean updateProduct(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("name",product.getName());
+        values.put("price", product.getPrice());
+        values.put("description", product.getDescription());
+
+        int rows = db.update("Products", values,"product_id = ?", new String[]{String.valueOf(product.getProduct_id())});
+        db.close();
+        return rows > 0;
+    }
+
+    public  boolean deleteSelectedProducts(List<Product> selectedProducts) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Tạo điều kiện WHERE để xóa các sản phẩm đã chọn
+        StringBuilder whereClause = new StringBuilder("product_id IN (");
+        for (int i = 0; i < selectedProducts.size(); i++) {
+            whereClause.append("?");
+            if (i < selectedProducts.size() - 1) {
+                whereClause.append(", ");
+            }
+        }
+        whereClause.append(")");
+
+        // Lấy danh sách các ID sản phẩm đã chọn
+        List<String> productIds = new ArrayList<>();
+        for (Product product : selectedProducts) {
+            productIds.add(String.valueOf(product.getProduct_id()));
+        }
+
+        // Xóa các sản phẩm đã chọn
+        int rows = db.delete("Products", whereClause.toString(), productIds.toArray(new String[0]));
+        db.close();
+        return rows > 0; // Trả về true nếu có sản phẩm bị xóa
     }
 
 

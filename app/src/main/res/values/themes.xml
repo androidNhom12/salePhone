@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.SalePhone" parent="Base.Theme.SalePhone" />
+
+    <style name="Theme.SalePhone.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SalePhone.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SalePhone.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
