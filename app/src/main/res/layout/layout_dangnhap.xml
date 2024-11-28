@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".DangKyActivity"
-    android:background="@color/material_dynamic_primary50"
+    android:background="@android:color/holo_blue_dark"
     >
 
 

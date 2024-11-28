@@ -101,6 +101,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(tbProducts);
         sqLiteDatabase.execSQL(tbOrders);
         sqLiteDatabase.execSQL(tbOrderDetails);
+
     }
 
     @Override
@@ -193,7 +194,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         values.put("name",product.getName());
         values.put("price",product.getPrice());
         values.put("description",product.getDescription());
-        values.put("image_url", "");
+        values.put("image_url", product.getImage_url());
 
         long result = db.insert("Products",null,values);
         db.close();
@@ -262,7 +263,16 @@ public class CreateDatabase extends SQLiteOpenHelper {
         return rows > 0; // Trả về true nếu có sản phẩm bị xóa
     }
 
-
-
+    //Thêm sản phẩm vào database
+    public void addProduct(String name, double price, String description, String imageUrl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("price", price);
+        values.put("description", description);
+        values.put("image_url", imageUrl);
+        db.insert("Products", null, values);
+        db.close();
+    }
 
 }
