@@ -34,8 +34,6 @@ public class ManagerProduct extends AppCompatActivity {
     List<Product> productList;
     CreateDatabase db;
 
-
-
     @Override
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +42,7 @@ public class ManagerProduct extends AppCompatActivity {
 
         db = db = new CreateDatabase(this);
 
-         productList = db.getAllProduct();
-
-
-
+        productList = db.getAllProduct();
 
         ProductAdapter adapter = new ProductAdapter(this,productList);
         ListView listView = findViewById(R.id.lvProductManager);
@@ -67,7 +62,7 @@ public class ManagerProduct extends AppCompatActivity {
                     }
                 });
 
-        backToHome = findViewById(R.id.backToHome);
+        backToHome = findViewById(R.id.iconHome);
         backToHome.setOnClickListener(v -> {
             Intent intent = new Intent(ManagerProduct.this, HomeActivity.class);
             startActivity(intent);

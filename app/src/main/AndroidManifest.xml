@@ -26,6 +26,8 @@
         <activity android:name=".AccountActivity" />
         <activity android:name=".DangKyActivity"/>
         <activity android:name=".ManagerProduct"/>
+        <activity android:name=".CartActivity" />
+
     </application>
 
 </manifest>

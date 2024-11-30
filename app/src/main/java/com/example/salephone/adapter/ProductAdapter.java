@@ -51,8 +51,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView productPrice = convertView.findViewById(R.id.productPrice);
         productPrice.setText("Giá: " + product.getPrice() + " VND");
 
-        TextView productDescription = convertView.findViewById(R.id.productDescription);
-        productDescription.setText(product.getDescription());
+        TextView productQuantity = convertView.findViewById(R.id.productQuantity);
+        productQuantity.setText(product.getDescription());
 
         // Set CheckBox (optional)
         CheckBox productCheckBox = convertView.findViewById(R.id.cbProduct);

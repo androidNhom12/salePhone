@@ -47,10 +47,10 @@
             android:textColor="@color/redButton"
             />
         <TextView
-            android:id="@+id/productDescription"
+            android:id="@+id/productQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tran huy hoang"
+            android:text="Số lượng"
             android:textSize="16dp"/>
     </LinearLayout>
 

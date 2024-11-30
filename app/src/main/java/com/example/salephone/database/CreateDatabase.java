@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.salephone.entity.CartItem;
 import com.example.salephone.entity.Product;
 import com.example.salephone.entity.User;
 
@@ -274,5 +275,25 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.insert("Products", null, values);
         db.close();
     }
+
+    //Lấy dữ liệu đổ lên giỏ hàng
+//    public ArrayList<CartItem> loadCartItemsFromDatabase() {
+//        ArrayList<CartItem> cartItems = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT name, image_url, price, quantity FROM product", null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                String name = cursor.getString(0);
+//                String imageUrl = cursor.getString(1); // Lấy URL hình ảnh
+//                int price = cursor.getInt(2);
+//                int quantity = cursor.getInt(3);
+//                cartItems.add(new CartItem(name, imageUrl, price, quantity));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//        return cartItems;
+//    }
 
 }

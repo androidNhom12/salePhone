@@ -23,7 +23,7 @@ import com.example.salephone.entity.Product;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    ImageView iconAccount;
+    ImageView iconAccount, iconCart, iconPhone;
     EditText edtSearch;
     GridLayout gridLayoutProducts; // Khai báo GridLayout
     private ViewFlipper viewFlipper;
@@ -88,11 +88,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Giỏ hàng
+        iconCart.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+            startActivity(intent);
+        });
 
     }
 
     public void getWidget(){
         iconAccount = findViewById(R.id.iconAccount);
+        iconCart = findViewById(R.id.iconCart);
+        iconPhone = findViewById(R.id.iconPhone);
         edtSearch = findViewById(R.id.edtSearch);
         gridLayoutProducts = findViewById(R.id.gridLayoutProducts);
         viewFlipper = findViewById(R.id.viewFlipper);
