@@ -3,8 +3,6 @@ package com.example.salephone;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.net.http.UrlResponseInfo;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,11 +10,11 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.salephone.database.CreateDatabase;
 import com.example.salephone.entity.Product;
 
@@ -24,6 +22,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     ImageView iconAccount, iconCart, iconPhone;
+    ImageView logoIphone, logoSamsung, logoXiaomi, logoVivo, logoOppo;
     EditText edtSearch;
     GridLayout gridLayoutProducts; // Khai báo GridLayout
     private ViewFlipper viewFlipper;
@@ -33,6 +32,20 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home);
+
+        //link elements
+        getWidget();
+
+        //create database and get data to gridview
+        getData();
+
+        bannerFlipper();
+
+        navbarClick();
+        logoClick();
+    }
+
+    public void getData(){
         // Mở cơ sở dữ liệu
         CreateDatabase createDatabase = new CreateDatabase(this);
         createDatabase.open();
@@ -40,15 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         createDatabase.ensureAdminAccountExists();
 
         CreateDatabase db = new CreateDatabase(this);
-        //db.addProduct("iPhone 15 Pro", 39990000, "Smartphone from Apple with ProMotion display", "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/a/galaxy-a15-xanh-01.png");
-
-        //link elements
-        getWidget();
-
-        // Bắt đầu tự động chuyển đổi giữa các ảnh
-        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
-        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
-        viewFlipper.startFlipping();
 
         // Lấy danh sách sản phẩm từ cơ sở dữ liệu
         List<Product> popularProducts = createDatabase.getAllProduct();
@@ -65,13 +69,52 @@ public class HomeActivity extends AppCompatActivity {
 
             productName.setText(product.getName());
             productPrice.setText("Giá: " + product.getPrice() + " VND");
-            //productImage.setImageResource();
+            // Dùng Picasso để tải hình ảnh từ URL
+            String imageUrl = product.getImage_url(); // Lấy URL ảnh từ đối tượng Product
+            Glide.with(this)
+                    .load(imageUrl) // URL ảnh
+                    .placeholder(R.drawable.iphone_logo) // Hình ảnh mặc định khi tải
+                    .error(R.drawable.samsung_logo) // Hình ảnh lỗi nếu không tải được
+                    .into(productImage); // Set vào ImageView
 
             // Thêm view sản phẩm vào GridLayout
             gridLayoutProducts.addView(productView);
         }
+    }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public void bannerFlipper(){
+        // Bắt đầu tự động chuyển đổi giữa các ảnh
+        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+        viewFlipper.startFlipping();
 
+        //chạm thì chuyển thủ công
+        viewFlipper.setOnTouchListener(new View.OnTouchListener() {
+            private float startX;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getX();
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        float endX = event.getX();
+                        if (startX > endX) {
+                            viewFlipper.showNext();
+                        } else if (startX < endX) {
+                            viewFlipper.showPrevious();
+                        }
+                        return true;
+                }
+                return false;
+            }
+        });
+
+    }
+
+    public void navbarClick(){
         // Xem thông tin tài khoản
         iconAccount.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
@@ -93,7 +136,35 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, CartActivity.class);
             startActivity(intent);
         });
+    }
 
+    //logo click
+    public void logoClick(){
+        //logo phone click
+        logoIphone.setOnClickListener(view -> {
+            //Intent intent = new Intent(HomeActivity.this, AppleProductsActivity.class);
+            //startActivity(intent);
+        });
+
+        logoSamsung.setOnClickListener(view -> {
+            //Intent intent = new Intent(HomeActivity.this, AppleProductsActivity.class);
+            //startActivity(intent);
+        });
+
+        logoXiaomi.setOnClickListener(view -> {
+            //Intent intent = new Intent(HomeActivity.this, AppleProductsActivity.class);
+            //startActivity(intent);
+        });
+
+        logoVivo.setOnClickListener(view -> {
+            //Intent intent = new Intent(HomeActivity.this, AppleProductsActivity.class);
+            //startActivity(intent);
+        });
+
+        logoOppo.setOnClickListener(view -> {
+            //Intent intent = new Intent(HomeActivity.this, AppleProductsActivity.class);
+            //startActivity(intent);
+        });
     }
 
     public void getWidget(){
@@ -103,5 +174,10 @@ public class HomeActivity extends AppCompatActivity {
         edtSearch = findViewById(R.id.edtSearch);
         gridLayoutProducts = findViewById(R.id.gridLayoutProducts);
         viewFlipper = findViewById(R.id.viewFlipper);
+        logoIphone = findViewById(R.id.logoIphone);
+        logoSamsung = findViewById(R.id.logoSamsung);
+        logoXiaomi = findViewById(R.id.logoXiaomi);
+        logoVivo = findViewById(R.id.logoVivo);
+        logoOppo = findViewById(R.id.logoOppo);
     }
 }

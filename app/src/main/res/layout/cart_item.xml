@@ -44,11 +44,31 @@
             android:textColor="@color/redButton" />
 
         <TextView
-            android:id="@+id/productDes"
+            android:id="@+id/productQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số lượng"
             android:textSize="16dp"/>
 
+        <!-- Các nút tăng giảm số lượng -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/decreaseQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/increaseQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="20sp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

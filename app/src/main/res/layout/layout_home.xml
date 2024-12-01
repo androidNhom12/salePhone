@@ -27,10 +27,10 @@
     <ViewFlipper
         android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:flipInterval="3000"
+        android:layout_height="180dp"
+        android:flipInterval="4000"
         android:autoStart="true">
-    <!-- Thay đổi ảnh mỗi 3 giây -->
+    <!-- Thay đổi ảnh mỗi 4 giây -->
 
 
     <ImageView
@@ -54,6 +54,120 @@
             android:src="@drawable/banner4" />
     </ViewFlipper>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoIphone"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/iphone_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iphone"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoSamsung"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:src="@drawable/samsung_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samsung"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoXiaomi"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/xiaomi_logo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xiaomi"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoVivo"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/vivo_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vivo"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoOppo"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/oppo_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oppo"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +175,7 @@
         android:textColor="@color/primary"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="4dp"
 
         />
     <LinearLayout
@@ -99,7 +213,7 @@
         </LinearLayout>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fillViewport="true">
 
