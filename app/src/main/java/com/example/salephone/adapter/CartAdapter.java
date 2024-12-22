@@ -1,5 +1,7 @@
 package com.example.salephone.adapter;
 
+
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -44,12 +46,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         CartItem cartItem = cartItems.get(position);
 
         holder.productName.setText(cartItem.getProduct().getName());
-        Glide.with(this.context)
-                .load(cartItem.getProduct().getImage_url()) // URL ảnh
-                .placeholder(R.drawable.iphone_logo) // Hình ảnh mặc định khi tải
-                .error(R.drawable.samsung_logo) // Hình ảnh lỗi nếu không tải được
-                .into(holder.productImage); // Set vào ImageView
-        holder.productPrice.setText("Giá: " + cartItem.getProduct().getPrice() + " VND");
+        int imageResId = context.getResources().getIdentifier(cartItem.getProduct().getImage_url(), "drawable", context.getPackageName());
+        if (imageResId != 0) {
+            holder.productImage.setImageResource(imageResId);
+        } else {
+            holder.productImage.setImageResource(R.drawable.iphone); // Ảnh mặc định
+        }
+        holder.productPrice.setText("Giá: " + cartItem.getProduct().getPrice() + " K");
         holder.productQuantity.setText("Số lượng: " + cartItem.getQuantity());
 
         // Nút tăng giảm số lượng

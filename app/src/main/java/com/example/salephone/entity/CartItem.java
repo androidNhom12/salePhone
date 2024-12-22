@@ -32,6 +32,6 @@ public class CartItem {
     }
 
     public double getTotalPrice() {
-        return Double.parseDouble(product.getPrice()) * quantity;
+        return Integer.parseInt(product.getPrice()) * quantity;
     }
 }

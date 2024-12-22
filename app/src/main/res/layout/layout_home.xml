@@ -22,6 +22,16 @@
             android:paddingRight="16dp"
             android:background="@drawable/rounded_edit_text"
             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSearchSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@android:color/white"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp" />
+
     </LinearLayout>
 
     <ViewFlipper
@@ -224,9 +234,11 @@
                 android:columnCount="2"
                 android:padding="16dp"
                 android:rowCount="1"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
             </GridLayout>
+
 
         </androidx.core.widget.NestedScrollView>
 

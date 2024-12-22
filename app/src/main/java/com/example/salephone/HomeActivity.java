@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -13,11 +15,15 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.salephone.database.CreateDatabase;
 import com.example.salephone.entity.Product;
+import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -26,6 +32,10 @@ public class HomeActivity extends AppCompatActivity {
     EditText edtSearch;
     GridLayout gridLayoutProducts; // Khai báo GridLayout
     private ViewFlipper viewFlipper;
+    private List<Product> allProducts;
+
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -36,8 +46,11 @@ public class HomeActivity extends AppCompatActivity {
         //link elements
         getWidget();
 
+        //setupMenu();
+
         //create database and get data to gridview
         getData();
+
 
         bannerFlipper();
 
@@ -45,17 +58,32 @@ public class HomeActivity extends AppCompatActivity {
         logoClick();
     }
 
-    public void getData(){
+
+//    private void openProductDetail(Product product) {
+//        // Chuyển đến màn hình chi tiết sản phẩm
+//        Intent intent = new Intent(this, ProductDetailActivity.class);
+//        intent.putExtra("product_id", product.getId());
+//        startActivity(intent);
+//    }
+
+    public void getData() {
         // Mở cơ sở dữ liệu
         CreateDatabase createDatabase = new CreateDatabase(this);
         createDatabase.open();
-        // Đảm bảo tài khoản admin tồn tại
         createDatabase.ensureAdminAccountExists();
 
         CreateDatabase db = new CreateDatabase(this);
 
         // Lấy danh sách sản phẩm từ cơ sở dữ liệu
         List<Product> popularProducts = createDatabase.getAllProduct();
+        allProducts = createDatabase.getAllProduct();
+
+        if (allProducts == null) {
+            allProducts = new ArrayList<>();
+        }
+
+        // Xóa toàn bộ view cũ trước khi thêm mới
+        gridLayoutProducts.removeAllViews();
 
         // Thêm sản phẩm vào GridLayout
         for (Product product : popularProducts) {
@@ -68,19 +96,28 @@ public class HomeActivity extends AppCompatActivity {
             ImageView productImage = productView.findViewById(R.id.productImage);
 
             productName.setText(product.getName());
-            productPrice.setText("Giá: " + product.getPrice() + " VND");
-            // Dùng Picasso để tải hình ảnh từ URL
-            String imageUrl = product.getImage_url(); // Lấy URL ảnh từ đối tượng Product
-            Glide.with(this)
-                    .load(imageUrl) // URL ảnh
-                    .placeholder(R.drawable.iphone_logo) // Hình ảnh mặc định khi tải
-                    .error(R.drawable.samsung_logo) // Hình ảnh lỗi nếu không tải được
-                    .into(productImage); // Set vào ImageView
+            productPrice.setText("Giá: " + product.getPrice() + " K");
+
+            // Dùng tài nguyên drawable thay vì Glide
+            int imageResId = getResources().getIdentifier(product.getImage_url(), "drawable", getPackageName());
+            if (imageResId != 0) {
+                productImage.setImageResource(imageResId);
+            } else {
+                productImage.setImageResource(R.drawable.iphone); // Ảnh mặc định
+            }
+
+            // Thiết lập kích thước cho mỗi item
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = getResources().getDisplayMetrics().widthPixels / 2 - 24; // Mỗi item chiếm 1/2 màn hình
+            params.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            params.setMargins(8, 8, 8, 8); // Căn lề
+            productView.setLayoutParams(params);
 
             // Thêm view sản phẩm vào GridLayout
             gridLayoutProducts.addView(productView);
         }
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     public void bannerFlipper(){
@@ -167,6 +204,32 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /*private void setupMenu() {
+        edtSearch.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getX() <= (edtSearch.getCompoundDrawables()[0].getBounds().width() + edtSearch.getPaddingLeft())) {
+                    // Icon menu được click
+                    if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                        drawerLayout.closeDrawer(GravityCompat.END);
+                    } else {
+                        drawerLayout.openDrawer(GravityCompat.END);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.menu_close) {
+                drawerLayout.closeDrawer(GravityCompat.END);
+                return true;
+            }
+            return false;
+        });
+    }*/
+
+
     public void getWidget(){
         iconAccount = findViewById(R.id.iconAccount);
         iconCart = findViewById(R.id.iconCart);
@@ -179,5 +242,7 @@ public class HomeActivity extends AppCompatActivity {
         logoXiaomi = findViewById(R.id.logoXiaomi);
         logoVivo = findViewById(R.id.logoVivo);
         logoOppo = findViewById(R.id.logoOppo);
+//        drawerLayout = findViewById(R.id.drawerLayout);
+//        navigationView = findViewById(R.id.navigationView);
     }
 }

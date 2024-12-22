@@ -41,7 +41,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         // Set Image
         ImageView productImage = convertView.findViewById(R.id.productImage);
-        productImage.setImageResource(R.drawable.oppo); // Placeholder, update with dynamic URL if needed
+        int imageResId = context.getResources().getIdentifier(product.getImage_url(), "drawable", context.getPackageName());
+        if (imageResId != 0) {
+            productImage.setImageResource(imageResId);
+        } else {
+            productImage.setImageResource(R.drawable.iphone); // Ảnh mặc định
+        }
 
         // Set Name
         TextView productName = convertView.findViewById(R.id.productName);
@@ -49,7 +54,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         // Set Price
         TextView productPrice = convertView.findViewById(R.id.productPrice);
-        productPrice.setText("Giá: " + product.getPrice() + " VND");
+        productPrice.setText("Giá: " + product.getPrice() + " K");
 
         TextView productQuantity = convertView.findViewById(R.id.productDes);
         productQuantity.setText(product.getDescription());
