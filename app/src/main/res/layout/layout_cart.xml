@@ -1,0 +1,108 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/backicon"
+        android:contentDescription="Back"
+        android:scaleType="fitCenter"
+        android:layout_gravity="start"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GIỎ HÀNG"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:gravity="center"/>
+
+    <!-- Phân cách giữa tiêu đề và RecyclerView -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Danh sách sản phẩm -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"/>
+
+    <!-- Phân cách giữa RecyclerView và tổng tiền -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Tổng tiền và nút chọn tất cả -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="16dp">
+
+        <!-- Nút chọn tất cả -->
+        <CheckBox
+            android:id="@+id/select_all_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn tất cả"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/total_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tổng cộng: 29,000,000 đ"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingBottom="10dp"/>
+    </LinearLayout>
+
+    <!-- Nút thanh toán và xóa -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/checkout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thanh Toán"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:enabled="false"/>
+
+        <!-- Nút xóa -->
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xóa các mục đã chọn"
+            android:backgroundTint="@color/red"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:onClick="onDeleteClicked"/>
+
+    </LinearLayout>
+</LinearLayout>

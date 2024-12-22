@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.salephone.entity.CartItem;
 import com.example.salephone.entity.Product;
 import com.example.salephone.entity.User;
 
@@ -34,6 +35,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
 
     public static final String TB_PRODUCTS_ID = "product_id";
     public static final String TB_PRODUCTS_NAME = "name";
+    public static final String TB_PRODUCTS_BRAND = "brand";
     public static final String TB_PRODUCTS_PRICE = "price";
     public static final String TB_PRODUCTS_DESCRIPTION= "description";
     public static final String TB_PRODUCTS_IMAGE_URL = "image_url";
@@ -71,6 +73,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         String tbProducts = "CREATE TABLE " + TB_PRODUCTS + " ( " +
                 TB_PRODUCTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TB_PRODUCTS_NAME + " TEXT NOT NULL, " +
+                TB_PRODUCTS_BRAND + " TEXT NOT NULL, " +
                 TB_PRODUCTS_PRICE + " REAL NOT NULL, " +
                 TB_PRODUCTS_DESCRIPTION + " TEXT, " +
                 TB_PRODUCTS_IMAGE_URL + " TEXT" +
@@ -101,6 +104,113 @@ public class CreateDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(tbProducts);
         sqLiteDatabase.execSQL(tbOrders);
         sqLiteDatabase.execSQL(tbOrderDetails);
+
+
+        sqLiteDatabase.execSQL("DELETE FROM Products");
+        sqLiteDatabase.execSQL("DELETE FROM users");
+        sqLiteDatabase.execSQL("DELETE FROM orders");
+        sqLiteDatabase.execSQL("DELETE FROM order_details");
+
+        insertData(sqLiteDatabase);
+
+    }
+
+
+    public void insertData(SQLiteDatabase sqLiteDatabase){
+        //Thêm data vào các bảng
+        // Thêm dữ liệu vào bảng Users
+        String insertUsers = "INSERT OR REPLACE INTO Users (username, password, phone_number, role, created_at) VALUES " +
+                "('customer1', 'password1', '0123456789', 'customer', datetime('now')), " +
+                "('customer2', 'password2', '0987654321', 'customer', datetime('now'));";
+
+        // Thêm dữ liệu vào bảng Products
+        String insertProducts = "INSERT OR REPLACE INTO Products (name, price, description, brand, image_url) VALUES " +
+                "('iPhone 13', 17390, 'Apple iPhone 13 with 128GB storage', 'Iphone', " +
+                "'iphone13'), " +
+
+                "('Samsung Galaxy S22 Ultra', 15000, 'Samsung flagship phone with 256GB storage', 'Samsung', " +
+                "'samsungs22ultra'), " +
+
+                "('Iphone 15 Pro Max', 28990, 'Apple Iphone 15 Pro Max', 'Iphone', " +
+                "'iphone15promax'), " +
+
+                "('Xiaomi 14T', 13990, 'Affordable flagship phone from Xiaomi', 'Xiaomi', " +
+                "'xiaomi14t'), " +
+
+                "('Iphone 16 Pro Max', 39490, 'Apple Iphone 16 Pro Max', 'Iphone', " +
+                "'iphone16promax'), " +
+
+                "('Xiaomi Redmi Note 12', 4990, 'Compact phone with excellent camera', 'Xiaomi', " +
+                "'xiaomiredminote12'), " +
+
+                "('Oppo A38', 4390, 'Premium build with flagship features', 'Oppo', " +
+                "'oppoa38'), " +
+
+                "('Xiaomi 13 Lite', 8590, 'Affordable flagship killer', 'Xiaomi', " +
+                "'xiaomi13lite'), " +
+
+                "('Vivo V25 Pro', 7690, 'Flagship phone with Zeiss optics', 'Vivo', " +
+                "'vivov25pro'), " +
+
+                "('Samsung Galaxy A55', 13990, 'Gaming phone with high refresh rate', 'Samsung', " +
+                "'samsunggalaxya55'), " +
+
+                "('Samsung Galaxy Z Fold 6', 41990, 'Budget phone with long battery life', 'Samsung', " +
+                "'samsunggalaxyzfold6'), " +
+
+                "('Oppo A3', 6490, 'Huawei flagship with advanced camera', 'Oppo', " +
+                "'oppoa3'), " +
+
+                "('Oppo Reno 8', 7490, 'Gaming phone with great performance', 'Oppo', " +
+                "'opporeno8'), " +
+
+                "('Oppo Reno 12 5G', 16090, 'Under-display camera phone', 'Oppo', " +
+                "'opporeno12'), " +
+
+                "('Oppo A58', 4690, 'Google top-tier phone with AI features', 'Oppo', " +
+                "'oppoa58'), " +
+
+                "('Xiaomi 14T Pro', 17990, 'Slim and lightweight phone', 'Xiaomi', " +
+                "'xiaomi14tpro'), " +
+
+                "('IPhone 11', 9890, 'Compact iPhone with powerful chip', 'Iphone', " +
+                "'iphone11'), " +
+
+                "('Xiaomi Redmi 10C', 3050, 'Mid-range phone with excellent display', 'Xiaomi', " +
+                "'xiaomiredmi10c'), " +
+
+                "('Iphone 14 Plus', 22490, 'Affordable performance phone', 'Iphone', " +
+                "'iphone14plus'), " +
+
+                "('Iphone 12 Pro', 23990, 'Unique design with transparent back', 'Iphone', " +
+                "'iphone12pro');";
+
+        // Thêm dữ liệu vào bảng Orders
+        String insertOrders = "INSERT OR REPLACE INTO Orders (user_id, date, status, amount) VALUES " +
+                "(2, datetime('now'), 'completed', 1599.98), " +
+                "(3, datetime('now'), 'pending', 699.99), " +
+                "(2, datetime('now'), 'cancelled', 999.99);";
+
+        // Thêm dữ liệu vào bảng Order_Details
+        String insertOrderDetails = "INSERT OR REPLACE INTO Order_Details (order_id, product_id, quantity, price) VALUES " +
+                "(1, 1, 1, 799.99), " +
+                "(1, 2, 1, 799.99), " +
+                "(2, 3, 1, 699.99), " +
+                "(3, 2, 1, 999.99);";
+
+        // Kiểm tra nếu bảng chưa có dữ liệu thì mới thêm
+        String checkProducts = "SELECT COUNT(*) FROM Products;";
+        Cursor cursor = sqLiteDatabase.rawQuery(checkProducts, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        cursor.close();
+
+        if(count == 0){
+            sqLiteDatabase.execSQL(insertProducts);
+            sqLiteDatabase.execSQL(insertOrders);
+            sqLiteDatabase.execSQL(insertOrderDetails);
+            sqLiteDatabase.execSQL(insertUsers);
+        }
     }
 
     @Override
@@ -193,7 +303,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         values.put("name",product.getName());
         values.put("price",product.getPrice());
         values.put("description",product.getDescription());
-        values.put("image_url", "");
+        values.put("image_url", product.getImage_url());
 
         long result = db.insert("Products",null,values);
         db.close();
@@ -262,7 +372,36 @@ public class CreateDatabase extends SQLiteOpenHelper {
         return rows > 0; // Trả về true nếu có sản phẩm bị xóa
     }
 
+    //Thêm sản phẩm vào database
+//    public void addProduct(String name, double price, String description, String imageUrl) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("name", name);
+//        values.put("price", price);
+//        values.put("description", description);
+//        values.put("image_url", imageUrl);
+//        db.insert("Products", null, values);
+//        db.close();
+//    }
 
-
+    //Lấy dữ liệu đổ lên giỏ hàng
+//    public ArrayList<CartItem> loadCartItemsFromDatabase() {
+//        ArrayList<CartItem> cartItems = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT name, image_url, price, quantity FROM product", null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                String name = cursor.getString(0);
+//                String imageUrl = cursor.getString(1); // Lấy URL hình ảnh
+//                int price = cursor.getInt(2);
+//                int quantity = cursor.getInt(3);
+//                cartItems.add(new CartItem(name, imageUrl, price, quantity));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//        return cartItems;
+//    }
 
 }

@@ -1,0 +1,45 @@
+<!-- activity_product_detail.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="362dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/oppo" />
+
+    <TextView
+        android:id="@+id/textViewProductName"
+        android:layout_width="364dp"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textColor="#053BEF"
+        android:textSize="22dp" />
+
+    <TextView
+        android:id="@+id/textViewProductPrice"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textColor="#CC0000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textViewProductDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Description" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF9800"
+        android:text="Thêm vào giỏ hàng" />
+</LinearLayout>

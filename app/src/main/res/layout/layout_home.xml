@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="8dp"
     android:background="@color/white">
@@ -22,13 +22,162 @@
             android:paddingRight="16dp"
             android:background="@drawable/rounded_edit_text"
             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSearchSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@android:color/white"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp" />
+
     </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:flipInterval="4000"
+        android:autoStart="true">
+    <!-- Thay đổi ảnh mỗi 4 giây -->
+
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:paddingTop="8dp"
-        android:src="@drawable/main" />
+        android:layout_height="match_parent"
+        android:src="@drawable/banner1" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/banner2" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/banner3" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/banner4" />
+    </ViewFlipper>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoIphone"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/iphone_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iphone"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoSamsung"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:src="@drawable/samsung_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samsung"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoXiaomi"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/xiaomi_logo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xiaomi"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoVivo"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/vivo_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vivo"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/logoOppo"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/oppo_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oppo"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,12 +185,13 @@
         android:textColor="@color/primary"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="4dp"
 
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@drawable/rounded_edit_text"
         android:orientation="vertical"
         >
@@ -58,93 +208,43 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="TOP ĐIỆN THOẠI ĐƯỢC YÊU THÍCH"
 
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Xem tất cả"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 />
 
         </LinearLayout>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fillViewport="true">
 
             <GridLayout
+                android:id="@+id/gridLayoutProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:orientation="horizontal"
-                android:background="@color/white"
-                android:layout_marginRight="12dp"
-                android:layout_marginLeft="12dp">
-
-                <include layout="@layout/layout_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp" />
-
-                <include layout="@layout/layout_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp" />
-
-                <include layout="@layout/layout_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp" />
-
-                <!-- Thêm nhiều sản phẩm khác ở đây -->
+                android:padding="16dp"
+                android:rowCount="1"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
             </GridLayout>
+
 
         </androidx.core.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/home"
-                 />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/smartphone" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/cart" />
-
-            <ImageView
-                android:id="@+id/iconAccount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/account" />
 
         </LinearLayout>
 
-
-        </LinearLayout>
-
-
-
-
-
-
-
+    <include
+        layout="@layout/bottom_navigation" />
 </LinearLayout>

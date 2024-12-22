@@ -18,13 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductAdapter extends ArrayAdapter<Product> {
+public class ListAdapter extends ArrayAdapter<Product> {
     private Context context;
     private List<Product> productList;
     private List<Boolean> selectedStates; // Lưu trạng thái CheckBox
 
-    public ProductAdapter(Context context, List<Product> productList) {
-        super(context, R.layout.product_item, productList);
+    public ListAdapter(Context context, List<Product> productList) {
+        super(context, R.layout.list_item, productList);
         this.context = context;
         this.productList = productList;
 
@@ -35,7 +35,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.product_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
         }
         Product product = productList.get(position);
 
@@ -58,14 +58,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         TextView productQuantity = convertView.findViewById(R.id.productDes);
         productQuantity.setText(product.getDescription());
-
-        // Set CheckBox (optional)
-        CheckBox productCheckBox = convertView.findViewById(R.id.cbProduct);
-        productCheckBox.setChecked(selectedStates.get(position)); // Lấy trạng thái từ danh sách
-
-        productCheckBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
-            selectedStates.set(position, isChecked); // Cập nhật trạng thái vào danh sách
-        }));
 
         return convertView;
     }

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp">
+
     <CheckBox
         android:id="@+id/cbProduct"
         android:layout_width="wrap_content"
@@ -13,7 +14,7 @@
     <!-- Hình ảnh sản phẩm -->
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="60dp"
+        android:layout_width="90dp"
         android:layout_height="90dp"
         android:src="@drawable/oppo"
         android:layout_marginEnd="16dp" />
@@ -30,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên sản phẩm"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:textColor="@color/primary"
             android:layout_marginBottom="8dp" />
 
@@ -39,16 +40,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giá: 100,000 VND"
-            android:textSize="22dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/redButton" />
 
         <TextView
-            android:id="@+id/productDes"
+            android:id="@+id/productQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số lượng"
             android:textSize="16dp"/>
 
+        <!-- Các nút tăng giảm số lượng -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/decreaseQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/increaseQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="20sp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

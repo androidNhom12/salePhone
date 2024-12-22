@@ -6,4 +6,6 @@
     <color name="redButton">#d32f2f</color>
     <color name="greenButton">#00695c</color>
     <color name="primary">#00a3a4</color>
+    <color name="brown">#BDBDBD</color>
+    <color name="red">#FF0000</color>
 </resources>

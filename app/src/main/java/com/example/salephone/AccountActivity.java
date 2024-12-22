@@ -23,7 +23,7 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.layout_manageraccount);
 
         tvUserName = findViewById(R.id.tvUserName);
-        iconHome = findViewById(R.id.iconHome);
+        iconHome = findViewById(R.id.iconUser);
 
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs",MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "user");

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/bottom_navigation.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@color/greenButton">
+
+    <ImageView
+        android:id="@+id/iconHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/home"
+        android:contentDescription="Home"/>
+
+    <ImageView
+        android:id="@+id/iconPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/smartphone"
+        android:contentDescription="Smartphone"/>
+
+    <ImageView
+        android:id="@+id/iconCart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/cart"
+        android:contentDescription="Cart"/>
+
+    <ImageView
+        android:id="@+id/iconAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/account"
+        android:contentDescription="Account"/>
+</LinearLayout>
